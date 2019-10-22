@@ -14,10 +14,15 @@ class OldMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+    {   
+        /*不確定怎麼使用input 目前以下呼叫方式 $request->input('_age') 都是空
         if ($request->input('_age') <= 20) {
-            echo $request->input('_age');
-            //return redirect('/');
+            return redirect('/');
+        }
+        */
+        echo 'age: '.$request->_age.'<br/>';
+        if($request->_age < 20){
+            echo '未成年<br/>';
         }
 
         return $next($request);
