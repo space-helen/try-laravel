@@ -14,19 +14,23 @@ class BeforeMiddleware
      * @return mixed
      */
     
-    /*
+    
     public function handle($request, Closure $next)
     {
-        // Perform action       //先執行任務  
-        echo 'before'.'<br/>';
+        // Perform action       //先執行任務
+        if($request->_var!=null){
+            echo 'before var: '.$request->_var.'<br/>';
+        }else{
+            echo 'before'.'<br/>';
+        }
         return $next($request);
     }
-    */
     
+    /*
     public function handle($request, Closure $next, $_var)
     {
         // Perform action       //先執行任務  
         echo 'before'.'<br/>'.$_var.'<br/>';
         return $next($request);
-    }
+    }*/
 }
