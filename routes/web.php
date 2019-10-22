@@ -105,12 +105,18 @@ Route::get('midware3/{_var}', function ($_var) {
     echo 'web: midware3';
 })->middleware('after', 'before:$_var'); //怎麼代參數？？？？？？？？？？？？？？？？？？？？？
 
+/*
+Route::get('midware3/{_var?}', function ($_var = null) {
+    echo 'web: midware3';
+})->middleware('after', 'before');
+*/
+
 Route::get('midware4', ['middleware' => ['after', 'before:midware4'], function () {
     echo 'web: midware4';
 }]);
 
 //
-Route::get('midwareold/{_age}', function ($_age) {
+Route::get('midwareold/{_age?}', function ($_age = null) {
     echo 'web: midwareold';
 })->middleware('old'); //失敗.......
 //------------------------------------------------------------------------
@@ -162,8 +168,18 @@ Route::group(['prefix' => 'api/{_accid}'], function () {
 //------------ Prefix End ------------
 //------------------------------------------------------------------------
 
+//------------------------------------------------------------------------
+//------------ Controller ------------
+//------------------------------------------------------------------------
 //php artisan make:controller filename --resource 創建controller檔案，路徑在"App\Http\Controllers"
-Route::get('user/{id}', 'UserController@showProfile');
-//接下來，你可以在控制器中註冊資源化路由：
-Route::resource('photo', 'PhotoController');
+
+Route::get('midcon/admin/{name}', 'middleController@sayHiToAdmin');
+Route::get('midcon/show/{id}', 'middleController@show');
+
+Route::resource('midcon', 'middleController', ['only' => [
+    'sayHiToAdmin', 'show'
+]]);
+//------------------------------------------------------------------------
+//------------ Controller End ------------
+//------------------------------------------------------------------------
 
